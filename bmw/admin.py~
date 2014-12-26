@@ -1,0 +1,32 @@
+from django.contrib import admin
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin
+from models import Center
+
+"""
+class ManInline(admin.StackedInline):
+    model = Man 
+    extra = 0
+"""
+"""
+#to make man 
+
+class ManAdmin(admin.ModelAdmin):
+    fields = ['username', 'password', 'age', 'center']
+
+admin.site.register(Man, ManAdmin)
+
+#to make man 
+
+class WomanAdmin(admin.ModelAdmin):
+    fields = ['username', 'password', 'center']
+
+admin.site.register(Woman, WomanAdmin)
+"""
+#to make Center
+
+class CenterAdmin(admin.ModelAdmin):
+	fields = ['place', 'name']
+
+admin.site.register(Center, CenterAdmin)
+

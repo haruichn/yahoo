@@ -1,0 +1,53 @@
+<head>
+  <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap.min.css" />
+  <meta name="viewport" content="width=device-width, inital-scale=1">
+  <style>
+    div{
+      border:1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Twitterもどき</h2>
+
+  {% if twt_list %}
+	<ul>
+	{% for tweet in twt_list %}
+	  <li>{{ tweet.text }} ,{{tweet.user.related_name }}, {{ tweet.user.get_profile.age }}</li>
+	{% endfor %}
+	</ul>
+
+  {% else %}
+    <p>No tweets are available.</p>
+  {% endif %}
+
+  <form method="post" action="write">{% csrf_token %}
+	text: <input type="text" name="twt" />
+	<input type="submit" value="tweet!" />
+  </form>
+  <br>
+
+  <form method="post" action="/login">{% csrf_token %}
+    User ID: <input type="text" name="user_id" />
+    <br />
+    Password: <input type="password" name="password" />
+    <br />
+    <input type="submit" value="login" />
+  </form>
+
+  <br>
+  <br>
+  <form method="post" action="create">{% csrf_token %}
+    User ID: <input type="text" name="user_id" />
+    <br />
+    Password: <input type="password" name="password" />
+    <br /> 
+    <input type="submit" value="Register" /> 
+  </form> 
+  <br>
+
+  <form method="get" action="/logout">
+    <input type="submit" value="logout" />
+  </form>
+</body>
