@@ -1,0 +1,14 @@
+  {% if request.user.is_authenticated %}
+    <p>こんにちは、{{ request.user.username }} さん</p>
+  {% else %}
+    <p>ログイン、またはユーザ登録を行ってください</p>
+  {% endif %}
+
+
+  {{ woman_list }}
+
+  <br>
+
+  <form method="get" action="/home">
+    <input type="submit" value="home" />
+  </form>

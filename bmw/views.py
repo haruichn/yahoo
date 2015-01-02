@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.contrib.auth import login as auth_login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 def home(request):
 	return render_to_response('home.html', context_instance=RequestContext(request))
@@ -53,3 +54,20 @@ def login(request):
 def logout_view(request):
     logout(request)
     return redirect('/home')
+
+def create_user(request):
+	user_id = request.POST['user_id']
+	password = request.POST['password']
+
+	new_user = User.objects.create_user(user_id, None, password)
+	new_user.save()
+
+	return redirect('/next')
+
+def next(sender, instance, created, **kwargs):
+	if created:
+		UserProfile.objects.create(user=new_user, sex=1)
+	return redirect('/home')
+
+post_save.connect(next, sender=User)
+		

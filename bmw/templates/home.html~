@@ -11,7 +11,7 @@
 <body>
   <h2>yahooコンテスト用アプリBMW</h2>
 
-  {% if request.user.is_authenticated %}
+  {% if request.user.is_authenticated: %}
     <p>こんにちは、{{ request.user.username }} さん</p>
   {% else %}
     <p>ログイン、またはユーザ登録を行ってください</p>
