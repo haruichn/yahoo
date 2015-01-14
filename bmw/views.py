@@ -62,12 +62,12 @@ def create_user(request):
 	new_user = User.objects.create_user(user_id, None, password)
 	new_user.save()
 
-	return redirect('/next')
+	user = authenticate(username=user_id, password=password)
+	if user is not None:
+		if user.is_active:
+			auth_login(request, user)  #login succeeded
 
-def next(sender, instance, created, **kwargs):
-	if created:
-		UserProfile.objects.create(user=new_user, sex=1)
 	return redirect('/home')
 
-post_save.connect(next, sender=User)
+
 		
