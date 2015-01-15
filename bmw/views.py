@@ -1,3 +1,5 @@
+# it is view for app
+
 from django.shortcuts import render_to_response, redirect
 from models import Center
 from django.template import RequestContext
